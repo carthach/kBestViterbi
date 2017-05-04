@@ -140,7 +140,7 @@ def _all_simple_paths_multigraph(G, source, target, cutoff=None):
 
 
 @not_implemented_for('multigraph')
-def shortest_simple_paths_with_costs(G, source, target, topK = 5, weight=None):
+def shortest_simple_paths_with_costs(G, source, target, weight=None):
     """Generate all simple paths in the graph G from source to target,
        starting from shortest ones.
 
@@ -217,8 +217,6 @@ def shortest_simple_paths_with_costs(G, source, target, topK = 5, weight=None):
        (Jul., 1971), pp. 712-716.
 
     """
-    k = 0
-
     if source not in G:
         raise nx.NetworkXError('source node %s not in graph' % source)
 
@@ -267,11 +265,6 @@ def shortest_simple_paths_with_costs(G, source, target, topK = 5, weight=None):
             #Changes needed for Viterbi
             path, cost = listB.pop()
             yield (path, cost)
-
-            if k < topK:
-                k = k+1
-            else:
-                return
 
             listA.append(path)
             prev_path = path
